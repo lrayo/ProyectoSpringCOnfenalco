@@ -1,0 +1,43 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="plantilla/template :: head">
+<meta charset="UTF-8">
+<title>Login</title>
+</head>
+<body>
+	<!-- Barra Nav -->
+	<header th:replace="plantilla/template :: header"></header>
+	
+	<div id="particles-js"></div>
+	
+	<!-- Barra contenido -->
+	<div class="container " >
+		<div class="container theme-showcase" role="main">
+			<div class="card mx-auto m" style="width: 18rem;">
+				<img th:src="@{/image/login.jpg}" width="136" height="136"
+					class="center">
+				<form class="form-signin col-sm-12" th:action="@{/login}" method="post">
+					<h3 class="form-signin-heading text-center">Iniciar Session</h3>
+					<label for="username" class="sr-only">Usuario</label> <input
+						type="text" id="username" name="username" class="form-control"
+						placeholder="Usuario" required autofocus> <label
+						for="password" class="sr-only">Contraseña</label> <input
+						type="password" id="password" name="password" class="form-control"
+						placeholder="Password" required>
+					<button class="btn btn-lg btn-secondary btn-block float-end" type="submit">Entrar</button>
+				</form>
+			</div>
+
+
+		</div>
+	</div>
+
+	<!-- Barra footer -->
+	<footer th:replace="plantilla/template :: footer">
+		
+	</footer>
+	<script type="text/javascript" th:src="@{/js/particles.min.js}"></script>
+	<script type="text/javascript" th:src="@{/js/app.js}"></script>
+</body>
+</html>

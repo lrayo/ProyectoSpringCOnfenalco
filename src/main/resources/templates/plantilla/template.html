@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:fragment="head">
+<meta charset="UTF-8">
+<title>CRUD Clientes</title>
+<!-- CSS only -->
+<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+<link rel="stylesheet" th:href="@{/css/signin.css}">
+</head>
+<body>
+
+	<!-- Barra de navegacion -->
+	<header th:fragment="header">
+		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+			<div class="container">
+
+				<a class="navbar-brand" href="#"><strong>MiLogo</strong></a>
+				<button class="navbar-toggler" type="button"
+					data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+					aria-controls="navbarSupportedContent" aria-expanded="false"
+					aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarSupportedContent">
+					<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+						<li class="nav-item"><a class="nav-link active"
+							aria-current="page" th:href="@{/inicio}">Inicio</a></li>
+						<li class="nav-item" sec:authorize="isAuthenticated()"><a class="nav-link"
+							th:href="@{/views/clientes/}">Clientes</a></li>
+
+					</ul>
+
+					<ul class="navbar-nav me-end mb-2 mb-lg-0">
+						<li sec:authorize="!isAuthenticated()"><a
+							class="btn btn-outline-warning" th:href="@{/login}">Iniciar
+								Sesion</a></li>
+								
+								
+						<li class="dropdown" sec:authorize="isAuthenticated()">
+							<a class="btn btn-outline-warning dropdown-toggle" href="#"
+								role="button" data-bs-toggle="dropdown" aria-expanded="false">
+								<span sec:authentication="name"></span>
+								 </a>
+
+							<ul class="dropdown-menu">
+								<li><a class="dropdown-item" href="#">Perfil</a></li>
+								<li><a class="dropdown-item" href="#">Cambiar Contraseña</a></li>
+								<li><form th:action="@{logout}" method="post">
+									<button class="dropdown-item" type="submit">Cerrar Secion</button>
+								</form></li>
+							</ul>
+						</li>
+					</ul>
+
+				</div>
+
+			</div>
+		</nav>
+
+		<!-- MENSAJE -->
+		<div class="alert alert-success alert-dismissible fade show"
+			role="alert" th:if="${success != null}">
+			<label th:text="${success}"></label>
+			<button type="button" class="btn-close" data-bs-dismiss="alert"
+				aria-label="Close"></button>
+		</div>
+		<div class="alert alert-danger alert-dismissable fade show"
+			role="alert" th:if="${error != null}">
+			<label th:text="${error}"></label>
+			<button type="button" class="btn-close" data-bs-dismiss="alert"
+				aria-label="Close"></button>
+		</div>
+		<div class="alert alert-warning alert-dismissible fade show"
+			role="alert" th:if="${warning != null}">
+			<label th:text="${warning}"></label>
+			<button type="button" class="btn-close" data-bs-dismiss="alert"
+				aria-label="Close"></button>
+		</div>
+		<div class="alert alert-info alert-dismissable fade show" role="alert"
+			th:if="${info != null}">
+			<label th:text="${info}"></label>
+			<button type="button" class="btn-close" data-bs-dismiss="alert"
+				aria-label="Close"></button>
+		</div>
+
+	</header>
+
+	<!-- Contenido -->
+	<div class="container"></div>
+
+	<!--  Pie de página -->
+	<footer th:fragment="footer"
+		class="bg-dark text-white text-center fixed-bottom">
+
+		<p>Copyrigth JavaSpring &copy; - 2022</p>
+
+		<script type="text/javascript" th:src="@{/js/bootstrap.bundle.min.js}"></script>
+	</footer>
+
+
+</body>
+</html>

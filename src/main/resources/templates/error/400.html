@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="plantilla/template :: head">
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<!-- Barra Nav -->
+	<header th:replace="plantilla/template :: header"></header>
+	
+	<!-- Barra contenido -->
+	<div class="container text-center">
+		<div class="panel">
+			<div class="panel-heading ">
+				<h3 class="panel-title text-danger">
+					<span th:text="${error}"></span> - <span class="text-end" th:text="${status}"></span>
+				</h3>
+			</div>
+			<div class="panel-body" text-center>
+				<img alt="" th:src="@{/image/400.jpg}" width="100%" height="500">
+				<button class="btn btn-success position-absolute bottom-0 end-0 mb-5 me-2" onclick="goBack()">Regresar</button>
+				<h4 class="m-4">Ha hecho una solicitud incorrecta</h4>
+				
+			</div>
+		</div>
+	</div>
+	
+	<!-- Barra footer -->
+	<footer th:replace="plantilla/template :: footer" ></footer>
+	
+	<script>
+		function goBack(){
+			window.history.back();
+		}
+	</script>
+</body>
+</html>

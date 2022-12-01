@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="plantilla/template :: head">
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<!-- Barra Nav -->
+	<header th:replace="plantilla/template :: header"></header>
+
+	<!-- Barra contenido -->
+	<div class="container">
+		<div class="card bg-light">
+			<div class="card-header bg-dark text-white" th:text="${titulo}"></div>
+			<div class="card-body">
+				<form th:action="@{/views/clientes/save}" th:object="${cliente}"
+					method="post">
+					<div class="mb-3 row">
+						<input type="hidden" th:field="*{id}"> 
+						<label
+							for="nombres" class="col-md-2">Nombres:</label> 
+							<input
+							type="text" th:field="*{nombres}"
+							class="col-md-6 form-control-sm" id="nombres"
+							placeholder="Nombres del cliente">
+						<div class="col-md-2 form-text text-danger" th:if="${#fields.hasErrors('nombres')}"
+						th:errors="*{nombres}"></div>
+					</div>
+					<div class="mb-3 row">
+						<label for="apellidos" class="col-md-2">Apellidos:</label> <input
+							type="text" th:field="*{apellidos}"
+							class="col-md-6 form-control-sm" id="apellidos"
+							placeholder="Apellidos del cliente">
+						<div class="col-md-2 form-text text-danger" th:if="${#fields.hasErrors('apellidos')}"
+						th:errors="*{apellidos}"></div>
+					</div>
+					<div class="mb-3 row">
+						<label for="telefono" class="col-md-2">Teléfono:</label> <input
+							type="text" th:field="*{telefono}"
+							class="col-md-6 form-control-sm" id="telefono"
+							placeholder="Teléfono del cliente">
+						<div class="col-md-2 form-text text-danger" th:if="${#fields.hasErrors('telefono')}"
+						th:errors="*{telefono}"></div>
+					</div>
+					<div class="mb-3 row">
+						<label for="email" class="col-md-2">Email:</label> <input
+							type="text" th:field="*{email}" class="col-md-6 form-control-sm"
+							id="email" placeholder="Email del cliente">
+						<div class="col-md-2 form-text text-danger" th:if="${#fields.hasErrors('email')}"
+						th:errors="*{email}"></div>
+					</div>
+					<div class="mb-3 row">
+						<label for="depto" class="col-md-2">Departamento:</label> <Select
+							 class="col-md-6 form-control-sm" id="depto">
+							 <option value="" disabled=disabled selected="selected">--Departamento--</option>
+							<option th:each="depto:${deptos}" 
+							th:value="${depto.id}"
+							th:text="${depto.nombre}" />
+						</Select>
+					</div>
+					<div class="mb-3 row">
+						<label for="ciudad" class="col-md-2">Ciudad:</label> <Select
+							th:field="*{ciudad}" class="col-md-6 form-control-sm" id="ciudad">
+							<option value="" disabled=disabled selected="selected">--Ciudad--</option>
+							<option th:each="ciudad:${ciudades}" 
+							th:value="${ciudad.id}"
+								th:text="${ciudad.ciudad}" />
+						</Select>
+					</div>
+					<div class="card-footer bg-dark">
+						<input type="submit" class="btn btn-primary btn-sm"
+							value="Guardar" />
+					</div>
+
+				</form>
+			</div>
+		</div>
+	</div>
+	<script th:src="@{/js/jquery.min.js}"></script>		
+	<script th:inline="javascript">
+	/* Variable Javascript que guarda el contextPath para formar la URL a la cual haremos la peticion*/
+	var contextPath = /*[[@{http://localhost:8083/clientes/ciudadespordepto}]]*/
+	
+		/* --------- BUSCAR CIUDADES SEGUN EL DEPTO SELECCIONADO --------- */
+		$('#depto').change(
+		function() {				
+			$.getJSON(contextPath,
+				{
+					idDepto : $(this).val(),
+					ajax : 'true'
+				},
+				function(data) {
+					var html = '<option value="">--Seleccione Ciudad--</option>';
+					var len = data.length;
+					for (var i = 0; i < len; i++) {
+						html += '<option value="' + data[i].id + '">'
+								+ data[i].ciudad
+								+ '</option>';
+					}
+					html += '</option>';
+					$('#ciudad').html(html);
+				});
+		});
+
+	</script>
+	
+	<!-- Barra footer -->
+	<footer th:replace="plantilla/template :: footer"></footer>
+	
+</body>
+</html>

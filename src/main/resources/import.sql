@@ -1,0 +1,4 @@
+INSERT INTO deptos(id, nombre) VALUES (1,'Bogotá DC'),(2,'Antioquia'),(3,'Santander'),(4,'Atlantico'),(5,'Valle del Cauca');
+INSERT INTO ciudades(id, ciudad, deptos_id) VALUES (1,'Bogotá',1),(2,'Medellín',2),(3,'Bucaramanga',3),(4,'Barranquilla',4),(5,'Cali',5);
+INSERT INTO ciudades(id, ciudad, deptos_id) VALUES (6,'Bello',2),(7,'Envigado',2),(8,'Girón',3),(9,'Soledad',4),(10,'Palmira',5);
+INSERT INTO clientes(id, nombres, apellidos, telefono, email, ciudades_id) VALUES (1,'Jose','Herrera','311-7489410','jnadinh@hotmail.com',1),(2,'Carlos','Cardenas','312-1234567','carlos@gmail.com',3),(3,'Maria','Marulanda','313-7654321','maria@hotmail.com',5);
