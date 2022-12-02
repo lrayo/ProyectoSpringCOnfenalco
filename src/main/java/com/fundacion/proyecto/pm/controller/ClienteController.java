@@ -112,10 +112,14 @@ public class ClienteController {
 			return "redirect:/views/clientes/";
 		}
 
-		List<Ciudad> listCiudades = ciudadService.listaCiudades();
+		//List<Ciudad> listCiudades = ciudadService.listaCiudades();
+		List<Depto> listaDeptos = deptoService.listarDeptos();
+		List<Ciudad> listCiudades = ciudadService.buscarPorIdDepto(idDepto);
+
 
 		model.addAttribute("titulo", "Formulario: Editar Cliente");
 		model.addAttribute("cliente", cliente);
+		model.addAttribute("deptos", listaDeptos);
 		model.addAttribute("ciudades", listCiudades);
 
 		return "/views/clientes/formCrear";
